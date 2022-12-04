@@ -65,10 +65,9 @@ a <- exp(coef(lm)[1])
 b <- coef(lm)[2]
 
 # Plot labels
-label <- vector(mode = "character", length = 3)
-label[1] <- "y = a * x^b"
-label[2] <- paste0("a = ", round(a, 3))
-label[3] <- paste0("b = ", round(b, 3))
+label <- vector(mode = "character", length = 2)
+label[1] <- paste0("a = ", round(a, 3))
+label[2] <- paste0("b = ", round(b, 3))
 
 # Prediction Lines
 x_predicted <- seq(min(tree$dbh.in), max(tree$dbh.in), 0.001)
@@ -92,7 +91,7 @@ p1 <- ggplot() +
   # Plots the parameter values
   geom_label(
     aes(
-      label = paste(label[1], label[2], label[3], sep = "\n"),
+      label = paste(label[1], label[2], sep = "\n"),
       x = min(x_predicted),
       y = max(y_predicted)
     ),
@@ -148,7 +147,7 @@ a2 <- pull(exp(coef(lme)[1]))
 b2 <- pull(coef(lme)[2])
 
 # Plot labels
-label2 <- vector(mode = "character", length = 3)
+label2 <- vector(mode = "character", length = 2)
 label2[1] <- paste0("a = ", round(a2, 3))
 label2[2] <- paste0("b = ", round(b2, 3))
 
@@ -197,7 +196,7 @@ p3 <- ggarrange(p1, p2, ncol = 2, nrow = 1, common.legend = TRUE, legend = "righ
   )
 
 # Exports the combined plot
-ggsave(plot = p3, "../Figures/AllometryCoarse.svg", width = 40, height = 20, units = "cm")
+ggsave(plot = p3, "../Figures/AllometryCoarse.svg", width = 20, height = 10, units = "cm")
 
 ################################################################################
 ####### 5. Biomass Calculations ################################################
