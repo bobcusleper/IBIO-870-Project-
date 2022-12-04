@@ -147,7 +147,7 @@ p <- ggarrange(plots[[1]], plots[[2]], plots[[3]], plots[[4]],
   )
 
 # Exports Plot
-ggsave(plot = p, "../Figures/AllometryFine.svg", width = 30, height = 20, units = "cm")
+ggsave(plot = p, "../Figures/AllometryFine.svg", width = 30, height = 14, units = "cm")
 
 ################################################################################
 ####### 2. Spatial Autocorrelation Test ########################################
