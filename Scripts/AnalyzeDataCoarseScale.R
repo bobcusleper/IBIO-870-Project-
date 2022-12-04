@@ -48,7 +48,7 @@ map <- ggplot() +
 
 # Exports Map
 dir.create("../Figures", showWarnings = FALSE)
-ggsave(plot = map, "../Figures/StudySites.svg", width = 30, height = 20, units = "cm")
+ggsave(plot = map, "../Figures/StudySites.svg", width = 15, height = 15, units = "cm")
 
 ################################################################################
 ####### 2. Allometry Plots #####################################################
