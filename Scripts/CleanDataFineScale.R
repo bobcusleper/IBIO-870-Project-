@@ -48,7 +48,30 @@ tree_clean <- tree %>%
     tree, loc, easting, northing, dbh.in, DWtotWOleaf.lb
   ) %>%
   drop_na() %>%
-  distinct(easting, northing, .keep_all = TRUE)
+  distinct(easting, northing, .keep_all = TRUE) #%>%
+  # mutate(loc = case_when(
+  #   loc == "ASGA" ~ "Allegan State Game Area",
+  #   loc == "FBIC" ~ "Forest Biomass Inovation Center",
+  #   loc == "KF" ~ "Kellogg Forest",
+  #   loc == "LC" ~ "Lake City",
+  #   loc == "RF" ~ "Fred Russ Forest",
+  #   loc == "MC" ~ "MacCready Reserve",
+  #   loc == "NW" ~ "Newton Woods"
+  # ))
+
+# # Selects forest location with the largest sample size
+# max_sample_loc <- tree_clean %>%
+#   group_by(loc) %>%
+#   summarize(count = n()) %>%
+#   slice_max(count) %>%
+#   select(loc) %>%
+#   pull()
+#
+# # Filters the tree data to the forest of interest
+# tree_clean <- tree_clean %>%
+#   filter(loc == max_sample_loc) %>%
+#   filter(!spp.FIA == "YB") %>%
+#   filter(!(spp.FIA == "LZ" & tree == 2))
 
 # Gets the tree id info to filter the plot data
 tree_id <- tree_clean %>%
@@ -96,6 +119,20 @@ coords <- tree_utm_16 %>%
 # Joins the new coordinates
 tree_utm_16 <- bind_cols(tree_utm_16, coords) %>%
   relocate(loc, scientific.name, spp, tree, easting, northing, lat, lon, dbh.in, dwtot.lb)
+
+# # Converts UTM 17 coordinates to lat lon
+# tree_utm_17 <- tree_clean %>%
+#   filter(easting < 300000)
+
+# coords <- tree_utm_17 %>%
+#   vect(geom = c("easting", "northing"), crs = "+proj=utm +zone=17") %>%
+#   project("+proj=longlat") %>%
+#   crds(df = TRUE) %>%
+#   rename("lat" = y, "lon" = x)
+
+# # Joins the new coordinates
+# tree_utm_17 <- bind_cols(tree_utm_17, coords) %>%
+#   relocate(loc, spp, tree, easting, northing, lat, lon, dbh.in, dwtot.lb)
 
 # Joins tree data back together and adds 
 tree_clean <- tree_utm_16 #bind_rows(tree_utm_16, tree_utm_17)

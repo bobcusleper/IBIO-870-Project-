@@ -48,7 +48,7 @@ map <- ggplot() +
 
 # Exports Map
 dir.create("../Figures", showWarnings = FALSE)
-ggsave(plot = map, "../Figures/StudySites.svg", width = 15, height = 15, units = "cm")
+ggsave(plot = map, "../Figures/StudySites.svg", width = 20, height = 20, units = "cm")
 
 ################################################################################
 ####### 2. Allometry Plots #####################################################
@@ -65,7 +65,7 @@ a <- exp(coef(lm)[1])
 b <- coef(lm)[2]
 
 # Plot labels
-label <- vector(mode = "character", length = 2)
+label <- vector(mode = "character", length = 3)
 label[1] <- paste0("a = ", round(a, 3))
 label[2] <- paste0("b = ", round(b, 3))
 
@@ -147,7 +147,7 @@ a2 <- pull(exp(coef(lme)[1]))
 b2 <- pull(coef(lme)[2])
 
 # Plot labels
-label2 <- vector(mode = "character", length = 2)
+label2 <- vector(mode = "character", length = 3)
 label2[1] <- paste0("a = ", round(a2, 3))
 label2[2] <- paste0("b = ", round(b2, 3))
 
